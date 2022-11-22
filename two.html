@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第一集《遇赦》</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
+		<link rel="stylesheet" href="css/mdui.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				font-size: 0;
+				display: inline-block;
+			}
+			html{
+				margin: 0;
+				padding: 0;
+				width:100%;
+				height:100%;
+				/* overflow: scroll; */
+			}
+			#total{
+				width:100%;
+				height:100%;
+				/* background-color: #83c8a6; */
+				background-color: #95d9cb;
+				/* background-image: url(img/bg.png); */
+				/* background-repeat: no-repeat; */
+			}
+			#bg{
+				width:100%;
+				height:94%;
+				background: url(img/chicken1.png) no-repeat 120% 52%,
+							url(img/flower1.png) no-repeat -40% 100%,
+							url(img/pig1.png) no-repeat -15% 0%;
+							/* url(img/un1.png) no-repeat 120% 0%; */
+				background-size: 60% auto;
+				margin: 0;
+				padding: 0;
+			}
+			#top{
+				height: 6%;
+				position: relative;
+			}
+			#top svg{
+				width:100%;
+				height:100%;
+			}
+			#top button{
+				height: 100%;
+				width: 8%;
+			}
+			#title{
+				position: absolute;
+				color: #f3fffa;
+				height: 100%;
+				width: 10%;
+				left:42%; 
+				top:15%; 
+				font-size: 30px;
+			}
+			#content{
+				border: 6px solid #406351;
+				margin: 10% 8% 0 8%;
+				/* padding: ; */
+				width:84%;
+				height:80%;
+				border-radius: 5%;
+				background-color: #e1ffef;
+				opacity: 0.9;
+			}
+			#name{
+				font-size: 48px;
+				text-align: center;
+				font-weight: bold;
+				/* border: 2px solid red; */
+				width: 35%;
+				height: 5%;
+				position: relative;
+				top: 0%;
+				left: 33%;
+			}
+			#next{
+				/* border: 2px solid red; */
+				width: 16%;
+				height: 10%;
+				position: relative;
+				top: 3%;
+				left: 45%;
+				background: url(img/next.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+			}
+			#pre{
+				/* border: 2px solid red; */
+				width: 15%;
+				height: 10%;
+				position: relative;
+				top: 1%;
+				left: 1%;
+				background: url(img/pre.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+			}
+		</style> 
+	</head>
+	<body>
+		<div id="total" class="mdui-appbar mdui-appbar-fixed">
+			
+				<!-- Tab栏 -->
+				<div class="mdui-toolbar mdui-color-teal-800" id="top">
+					<button class="mdui-btn mdui-ripple mdui-appbar-scroll-hide">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+						  <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+						</svg>
+					</button>
+					<div id="title">第一集</div>
+				</div>
+				
+				<!-- 背景图 -->
+				<div id="bg">
+					
+				<!-- 内容框 -->
+				<div id="content">
+					<!-- 上一张按钮 -->
+					<button class="mdui-btn mdui-ripple" id="pre" onclick="jump_to_one()"></button>
+				</div>
+				
+				<!-- 名字 -->
+				<div id="name">《 &nbsp;  遇&nbsp;&nbsp;&nbsp;&nbsp;赦  &nbsp; 》</div>
+				
+				<!-- 下一张按钮 -->
+				<button class="mdui-btn mdui-ripple" id="next"></button>
+				
+			</div>
+		</div>
+				
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<script src="js/mdui.min.js"></script>
+		<script src="js/jquery-3.6.0.min.js"></script>
+	</body>
+	<script type="text/javascript">
+		//先定义一个新事件名称，如tap
+		var tap = new Event("tap",{
+		        bubbles: true
+		    });
+		//获取手指按下时的坐标
+		    document.startPoint = {};
+		    document.addEventListener("touchstart",function(e){
+		        document.startPoint = {
+		            x: e.changedTouches[0].pageX,
+		            y: e.changedTouches[0].pageY
+		        }
+		    });
+		//获取手指抬起时的坐标
+		    document.addEventListener("touchend",function(e){
+		        var now = {
+		            x: e.changedTouches[0].pageX,
+		            y: e.changedTouches[0].pageY
+		        };
+		//限定抬起的坐标与按下时不超过5px，如果满足条件则派发tap点击事件
+		        if(Math.abs(now.x - document.startPoint.x)+Math.abs(now.y - document.startPoint.y) < 5){
+		            // 派发事件
+		            e.target.dispatchEvent(tap);
+		        }
+		    });
+		
+		
+		// ----------------------------------------------------------------------
+		
+		var next=document.getElementById("next");
+		next.addEventListener("tap",function(){
+			window.location.href="";
+		})
+		
+		var pre=document.getElementById("pre");
+		pre.addEventListener("tap",function(){
+			window.location.href="./index.html";
+		})
+		
+		function junp_to_one(){
+			window.location.href="./index.html";
+		}
+	</script>
+</html>
