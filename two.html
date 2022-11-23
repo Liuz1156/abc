@@ -97,13 +97,177 @@
 				width: 15%;
 				height: 10%;
 				position: relative;
-				top: 1%;
+				top: -35%;
 				left: 1%;
 				background: url(img/pre.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 			}
+			#tuo{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				/* background-color: red; */
+				z-index: 2;
+				position: absolute;
+				display: block;
+			}
+			#kong{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				/* background-color: blue; */
+				z-index: 10: absolute;
+				display: block;
+			}
+			#succ{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				/* background-color: blue; */
+				z-index:1;
+				position: absolute;
+				display: block;
+			}
+			#left_t{
+				/* border: 2px solid red; */
+				width: 45%;
+				height: 40%;
+				position: relative;
+				top: 13%;
+				left: 0%;
+				background: url(img/two_left.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 2; */
+			}
+			#right_t{
+				/* border: 2px solid red; */
+				width: 55%;
+				height: 40%;
+				position: relative;
+				top: -47%;
+				left: 60%;
+				background: url(img/two_right.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 3; */
+			}
+			#left_k{
+				/* border: 2px solid red; */
+				width: 45%;
+				height: 40%;
+				position: relative;
+				/* top: 33%;
+				left: 7%; */
+				top: 390px;
+				left: 50px;
+				background: url(img/two_left_1.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 0; */
+			}
+			#right_k{
+				/* border: 2px solid red; */
+				width: 55%;
+				height: 40%;
+				position: relative;
+				/* top: 37%;
+				left: -10%; */
+				top: 440px;
+				left: -90px;
+				background: url(img/two_right_1.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 1; */
+			}
+			#left_s{
+				/* border: 2px solid red; */
+				width: 45%;
+				height: 40%;
+				position: relative;
+				top: -67%;
+				left: 7%;
+				background: url(img/two_left.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				display: none;
+				/* z-index: 0; */
+			}
+			#right_s{
+				/* border: 2px solid red; */
+				width: 55%;
+				height: 40%;
+				position: relative;
+				top: -102.5%;
+				left: 35%;
+				background: url(img/two_right.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				display: none;
+				/* z-index: 1; */
+			}
+			#poem{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				background: url("img/poem2.png") no-repeat 45% 25%;
+				background-size: 50% 50%; 
+				z-index: 4;
+				position: absolute;
+				display: none;
+			}
+			#poem p{
+				/* border: 2px solid red; */
+				width:50%;
+				height:10%;
+				border-radius: 5%;
+				font-size: 36px;
+				color: #0a100d;
+				font-weight: bold;
+			}
+			#poem_title{
+				/* border: 2px solid red; */
+				font-size: 44px;
+				font-weight: bold;
+				color: #0a100d;
+			}
+			#text{
+				/* border: 2px solid red; */
+				width:100%;
+				height:50%;
+				position: absolute;
+				left: 30%;
+				top:63%;
+				line-height: 60px;
+			}
+			#re{
+				/* border: 2px solid red; */
+				width: 10%;
+				height: 8%;
+				position: relative;
+				top: 1%;
+				left: 1%;
+				background: url(img/refresh.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+			}
+			#refresh{
+				width: 50%;
+				height: 50%;
+			}
 		</style> 
+		<link rel="stylesheet" href="css/datouwang.css">
 	</head>
 	<body>
 		<div id="total" class="mdui-appbar mdui-appbar-fixed">
@@ -122,9 +286,58 @@
 				<div id="bg">
 					
 				<!-- 内容框 -->
-				<div id="content">
-					<!-- 上一张按钮 -->
-					<button class="mdui-btn mdui-ripple" id="pre" onclick="jump_to_one()"></button>
+				<div id="content" onclick="che()">
+					<div id="tuo">
+						<!-- 上一张按钮 -->
+						<button class="mdui-btn mdui-ripple" id="pre" onclick="jump_to_one()"></button>
+						<div id="left_t"></div>
+						<div id="right_t"></div>
+					</div>
+					<div id="kong">
+						<div id="left_k"></div>
+						<div id="right_k"></div>
+					</div>
+					<div id="succ">
+						<div id="left_s"></div>
+						<div id="right_s"></div>
+					</div>
+					
+					<!-- 完成拼图动画 -->
+					<svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<div class="dot dot-1"></div>
+					<div class="dot dot-2"></div>
+					<div class="dot dot-3"></div>
+					<div class="dot dot-4"></div>
+					<div class="dot dot-5"></div>
+					<div class="dot dot-6"></div>
+					<div class="dot dot-7"></div>
+					<div class="dot dot-8"></div>
+					
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-3"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-4"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-5"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-6"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-7"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-8"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<div id="poem">
+						<!-- 上一张按钮 -->
+						<button class="mdui-btn mdui-ripple" id="re">
+							<!-- <i class="mdui-icon material-icons" id="refresh">&#xe5d5;</i> -->
+						</button>
+						<div id="text">
+							<h3 id="poem_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遇&nbsp;&nbsp;&nbsp;赦</h3></br>
+							<p>是亦众生，与我体同</br>
+							应起悲心，怜彼错蒙</br>
+							普劝世人，放生戒杀</br>
+							不食其肉，乃谓爱物</p>
+						</div>
+					</div>
 				</div>
 				
 				<!-- 名字 -->
@@ -138,49 +351,214 @@
 				
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<script src="js/mdui.min.js"></script>
+		<script  src="js/datouwang.js"></script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 	</body>
 	<script type="text/javascript">
-		//先定义一个新事件名称，如tap
-		var tap = new Event("tap",{
-		        bubbles: true
-		    });
-		//获取手指按下时的坐标
-		    document.startPoint = {};
-		    document.addEventListener("touchstart",function(e){
-		        document.startPoint = {
-		            x: e.changedTouches[0].pageX,
-		            y: e.changedTouches[0].pageY
+		// 思路：利用移动端的`touchstart`事件记录时间点，`touchend`触发是使用当前时间减去touchstart记录的时间点，若值小于200且中间未发生touchmove则认为tap事件触发。
+		// 需要注意的是：在touchend执行callback回调的时候，默认this是指向window的，这里可根据需要进行this指向的改变和传递事件对象。此外为了使tap方法可反复触发，应在事件触发后重置必要的参数。
+		const tap = function (e, callback) {
+		    // e:事件源dom，callback:执行的方法
+		    let move = false,
+		        startTime = null;
+		    e.addEventListener('touchstart', function () {
+		        startTime = Date.now();
+		    }, false);
+		    e.addEventListener('touchmove', function () {
+		        move = true
+		    }, false);
+		    e.addEventListener('touchend', function (event) {
+		        // 不移动且停留时间小于200ms，触发tap
+		        if (!move && Date.now() - startTime < 200) {
+		            // 通过apply将this指向dom而不是window，并传递事件对象
+		            callback.apply(this, [event]);
 		        }
-		    });
-		//获取手指抬起时的坐标
-		    document.addEventListener("touchend",function(e){
-		        var now = {
-		            x: e.changedTouches[0].pageX,
-		            y: e.changedTouches[0].pageY
-		        };
-		//限定抬起的坐标与按下时不超过5px，如果满足条件则派发tap点击事件
-		        if(Math.abs(now.x - document.startPoint.x)+Math.abs(now.y - document.startPoint.y) < 5){
-		            // 派发事件
-		            e.target.dispatchEvent(tap);
-		        }
-		    });
+		        // 重置参数
+		        startTime = null;
+		        move = false;
+		    }, false)
 		
+		}
 		
 		// ----------------------------------------------------------------------
 		
 		var next=document.getElementById("next");
-		next.addEventListener("tap",function(){
-			window.location.href="";
-		})
+		tap(next, function (e) {
+		   window.location.href=""
+		});
 		
 		var pre=document.getElementById("pre");
-		pre.addEventListener("tap",function(){
-			window.location.href="./index.html";
-		})
+		tap(pre, function (e) {
+		   window.location.href="./index.html"
+		});
 		
-		function junp_to_one(){
-			window.location.href="./index.html";
+		function jump_to_one(){
+			window.location.href="./index.html"
 		}
+		
+		// ---------------------------------------------------------------------------
+		var left = document.querySelector('#left_t');
+		var right = document.querySelector('#right_t');
+		var tuo = document.getElementById('tuo');
+		var succ = document.getElementById('succ');
+		var Rdx,Rdy,Ldx,Ldy;
+		
+		        left.addEventListener('touchstart', function(e){
+		            //获取按下时触点的位置  尺寸 1
+		            this.size1L = e.touches[0].clientX;
+		            //获取按下时 元素距离左侧的偏移量  2
+		            this.size2L = left.offsetLeft;
+		
+		            this.size1LY = e.touches[0].clientY;
+		            this.size2LY = left.offsetTop;
+					// console.log(e.touches[0].clientX)
+					
+		        });
+				right.addEventListener('touchstart', function(e){
+				    //获取按下时触点的位置  尺寸 1
+				    this.size1R = e.touches[0].clientX;
+				    //获取按下时 元素距离左侧的偏移量  2
+				    this.size2R = right.offsetLeft;
+						
+				    this.size1RY = e.touches[0].clientY;
+				    this.size2RY = right.offsetTop;
+					
+					//在按下时求出蓝色线段距离
+				});
+				
+		
+		        left.addEventListener('touchmove', function(e){
+		            this.size3L = e.touches[0].clientX;
+		            //获取移动后的触点的位置
+		            this.size3LY = e.touches[0].clientY;
+		
+		            var size4L = this.size3L - (this.size1L - this.size2L);
+		            var size4LY = this.size3LY - (this.size1LY - this.size2LY);
+		
+					//在修改偏移量的位置减掉相应距离
+		
+		            left.style.left = size4L-200  + 'px';
+		            left.style.top = size4LY  + 'px';
+					pin();
+		        });
+				right.addEventListener('touchmove', function(e){
+				    this.size3R = e.touches[0].clientX;
+				    //获取移动后的触点的位置
+				    this.size3RY = e.touches[0].clientY;
+						
+				    var size4R = this.size3R - (this.size1R - this.size2R);
+				    var size4RY = this.size3RY - (this.size1RY - this.size2RY);
+						
+				    //获取最大的left 的值
+					
+					//在修改偏移量的位置减掉相应距离
+						
+				    right.style.left = size4R   + 'px';
+				    right.style.top = size4RY-450  + 'px';
+					pin();
+				});
+						
+		
+		        document.body.addEventListener('touchstart', function(e){
+		            e.preventDefault();
+		        },{
+		            passive: false
+		        });
+		//---------------------------------------------------------------------
+		var raf=null;
+		var f1=false;
+		var f2=false;
+		function pin(){
+			var kong=document.getElementById("kong");
+			var kong_l=document.getElementById("left_k");
+			var kong_r=document.getElementById("right_k");
+			
+			// var f1=false;
+			// var f2=false;
+			if(check(kong_l,left)){
+				document.getElementById("left_t").style.visibility="hidden";
+				document.getElementById("left_k").style.visibility="hidden";
+				document.getElementById("left_s").style.display="block";
+				f1=true;
+				console.log("f1 "+f1)
+			}
+			if(check(kong_r,right)){
+				document.getElementById("right_t").style.visibility="hidden";
+				document.getElementById("right_k").style.visibility="hidden";
+				document.getElementById("right_s").style.display="block";
+				f2=true;
+				console.log("f2 "+f2)
+			}
+			var tuo = document.getElementById("tuo");
+			if(f1&&f2){
+				tuo.style.display="none";
+				kong.style.display="none";
+				succ.style.display="block";
+				console.log("succ")
+				var left_s=document.getElementById("left_s");
+				var right_s=document.getElementById("right_s");
+				
+				document.body.classList.toggle('liked')
+				
+				document.getElementById("poem").style.display="block";
+				document.getElementById("succ").style.opacity="0.15";
+				left_s.style.top="33%";
+				right_s.style.top="-2%";
+				document.getElementsByClassName("fly")[0].style.opacity="0.2";
+				document.getElementsByClassName("fly")[1].style.opacity="0.2";
+				return true;
+			}
+		}
+		function che(){
+			var tuo = document.getElementById("tuo");
+			if(f1&&f2){
+				tuo.style.display="none";
+				kong.style.display="none";
+				succ.style.display="block";
+				console.log("succ")
+				var left_s=document.getElementById("left_s");
+				var right_s=document.getElementById("right_s");
+				
+				document.body.classList.toggle('liked')
+				
+				document.getElementById("poem").style.display="block";
+				document.getElementById("succ").style.opacity="0.15";
+				left_s.style.top="33%";
+				right_s.style.top="-2%";
+				document.getElementsByClassName("fly")[0].style.opacity="0.2";
+				document.getElementsByClassName("fly")[1].style.opacity="0.2";
+				return true;
+			}
+		}
+		//判断2个div是否有交集,判断时以obj1作为固定的obj2作为移动的
+		            function check(obj1, obj2) {
+		                //以obj1作为固定的参照物，使用时注意div是否有top与left，如果没有设置的话会是空值
+		                //obj2在obj1的上面 obj2.top+obj2.height<obj1.top 
+		                //obj2在obj1的下面 obj2.top>obj1.top+obj1.height 
+		                //obj2在obj1的左面 obj2.left+obj2.width<obj1.left 
+		                //obj2在obj1的右面 obj2.left>obj1.left+obj1.width
+		                var obj1top = parseInt($(obj1).css("top"));
+		                var obj1left = parseInt($(obj1).css("left"));
+		                var obj1width = parseInt($(obj1).width());
+		                var obj1height = parseInt($(obj1).height());
+		                var obj2top = parseInt($(obj2).css("top"));
+		                var obj2left = parseInt($(obj2).css("left"));
+		                var obj2width = parseInt($(obj2).width());
+		                var obj2height = parseInt($(obj2).height());
+						// console.log(obj2top + obj2height/2)
+						// console.log(obj1top)
+		                if ((obj1top+obj1height-100>= obj2top + obj2height/2 && obj2top + obj2height/2 >= obj1top-400) && (obj2left + obj2width/2 +150>= obj1left+200 && obj2left + obj2width/2<=obj1left+obj1width+300)) {
+							// 670   330   240     180+w     490   
+							return true;
+		                }
+		                else {
+		                    return false;
+		                }
+		            }
+		//-------------------------------------------------------------------------------
+		tap(document.getElementById("re"), function() {
+			console.log("a")
+			window.location.reload(true);
+		});
 	</script>
 </html>
