@@ -202,7 +202,43 @@
 				cursor: move;
 				/* z-index: 1; */
 			}
+			#poem{
+				border: 2px solid red;
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				background: url("img/poem3.png") no-repeat 45% 25%;
+				background-size: 50% 50%; 
+				z-index: 3;
+				position: absolute;
+				display: none;
+			}
+			#poem p{
+				/* border: 2px solid red; */
+				width:50%;
+				height:10%;
+				border-radius: 5%;
+				font-size: 36px;
+				color: #0a100d;
+				font-weight: bold;
+			}
+			#poem_title{
+				/* border: 2px solid red; */
+				font-size: 44px;
+				font-weight: bold;
+				color: #0a100d;
+			}
+			#text{
+				/* border: 2px solid red; */
+				width:100%;
+				height:50%;
+				position: absolute;
+				left: 30%;
+				top:63%;
+				line-height: 60px;
+			}
 		</style> 
+		<link rel="stylesheet" href="css/datouwang.css">
 	</head>
 	<body>
 		<div id="total" class="mdui-appbar mdui-appbar-fixed">
@@ -234,6 +270,39 @@
 						<div id="left_s"></div>
 						<div id="right_s"></div>
 					</div>
+					
+					<!-- 完成拼图动画 -->
+					<svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<div class="dot dot-1"></div>
+					<div class="dot dot-2"></div>
+					<div class="dot dot-3"></div>
+					<div class="dot dot-4"></div>
+					<div class="dot dot-5"></div>
+					<div class="dot dot-6"></div>
+					<div class="dot dot-7"></div>
+					<div class="dot dot-8"></div>
+					
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-3"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-4"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-5"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-6"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-7"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-8"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
+					
+					<div id="poem">
+						<div id="text">
+							<h3 id="poem_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;众&nbsp;&nbsp;&nbsp;生</h3></br>
+							<p>是亦众生，与我体同</br>
+							应起悲心，怜彼错蒙</br>
+							普劝世人，放生戒杀</br>
+							不食其肉，乃谓爱物</p>
+						</div>
+					</div>
 				</div>
 				
 				<!-- 名字 -->
@@ -247,6 +316,7 @@
 				
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<script src="js/mdui.min.js"></script>
+		<script  src="js/datouwang.js"></script>
 		<script src="js/jquery-3.6.0.min.js"></script>
 	</body>
 	<script type="text/javascript">
@@ -288,9 +358,9 @@
 		   window.location.href="./two.html"
 		});
 		
-		// function jump_to_two(){
-		// 	window.location.href="./two.html"
-		// }
+		function jump_to_two(){
+			window.location.href="./two.html"
+		}
 		// ---------------------------------------------------------------------------
 		var left = document.querySelector('#left_t');
 		var right = document.querySelector('#right_t');
@@ -380,15 +450,26 @@
 		            passive: false
 		        });
 		//---------------------------------------------------------------------
+		var raf=null;
 		function pin(){
+			var kong=document.getElementById("kong");
 			var kong_l=document.getElementById("left_k");
 			var kong_r=document.getElementById("right_k");
 			if(check(kong_l,left)&&check(kong_r,right)){
 				tuo.style.display="none";
+				kong.style.display="none";
 				succ.style.display="block"
-			}else{
-				// console.log("left="+check(kong_l,left))
-				// console.log("right="+check(kong_r,right))
+				console.log("succ")
+				var left_s=document.getElementById("left_s");
+				var right_s=document.getElementById("right_s");
+				
+				document.body.classList.toggle('liked')
+				
+				document.getElementById("poem").style.display="block";
+				document.getElementById("succ").style.opacity="0.15";
+				document.getElementsByClassName("fly")[0].style.opacity="0.2";
+				document.getElementsByClassName("fly")[1].style.opacity="0.2";
+				return true;
 			}
 		}
 		//判断2个div是否有交集,判断时以obj1作为固定的obj2作为移动的
@@ -409,12 +490,14 @@
 						// console.log(obj2top + obj2height/2)
 						// console.log(obj1top)
 		                if ((obj1top+obj1height-100>= obj2top + obj2height/2 && obj2top + obj2height/2 >= obj1top+100) && (obj2left + obj2width/2 >= obj1left+100 && obj2left + obj2width/2<=obj1left+obj1width-100)) {
-		                    console.log("tt")
 							return true;
 		                }
 		                else {
 		                    return false;
 		                }
 		            }
+		//-------------------------------------------------------------------------------
+		
+		
 	</script>
 </html>
