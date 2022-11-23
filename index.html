@@ -100,7 +100,7 @@
 				height:100%;
 				border-radius: 5%;
 				/* background-color: red; */
-				z-index: 1;
+				z-index: 2;
 				position: absolute;
 				display: block;
 			}
@@ -110,8 +110,7 @@
 				height:100%;
 				border-radius: 5%;
 				/* background-color: blue; */
-				z-index: 0;
-				position: absolute;
+				z-index: 10: absolute;
 				display: block;
 			}
 			#succ{
@@ -120,9 +119,9 @@
 				height:100%;
 				border-radius: 5%;
 				/* background-color: blue; */
-				z-index: 2;
+				z-index:1;
 				position: absolute;
-				display: none;
+				display: block;
 			}
 			#left_t{
 				/* border: 2px solid red; */
@@ -181,12 +180,13 @@
 				width: 45%;
 				height: 40%;
 				position: relative;
-				top: 33%;
+				top: -67%;
 				left: 5%;
 				background: url(img/one_left.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
+				display: none;
 				/* z-index: 0; */
 			}
 			#right_s{
@@ -194,16 +194,17 @@
 				width: 55%;
 				height: 40%;
 				position: relative;
-				top: 37%;
-				left: -17%;
+				top: -63%;
+				left: 28%;
 				background: url(img/one_right.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
+				display: none;
 				/* z-index: 1; */
 			}
 			#poem{
-				border: 2px solid red;
+				/* border: 2px solid red; */
 				width:100%;
 				height:100%;
 				border-radius: 5%;
@@ -376,9 +377,7 @@
 		
 		            this.size1LY = e.touches[0].clientY;
 		            this.size2LY = left.offsetTop;
-					
-					Ldx = e.touches[0].clientX - 2*left.offsetLeft;
-					Ldy = e.touches[0].clientY - 2*left.offsetTop;
+					// console.log(e.touches[0].clientX)
 					
 		        });
 				right.addEventListener('touchstart', function(e){
@@ -391,8 +390,6 @@
 				    this.size2RY = right.offsetTop;
 					
 					//在按下时求出蓝色线段距离
-					Rdx = e.touches[0].clientX - right.offsetLeft;
-					Rdy = e.touches[0].clientY - 2*right.offsetTop;
 				});
 				
 		
@@ -404,19 +401,10 @@
 		            var size4L = this.size3L - (this.size1L - this.size2L);
 		            var size4LY = this.size3LY - (this.size1LY - this.size2LY);
 		
-		            //获取最大的left 的值
-		            // var maxLeft = document.documentElement.clientWidth - box.offsetWidth;
-					var cont_width = document.getElementById("content").offsetWidth;
-					var cont_height = document.getElementById("content").offsetHeight;
-					var LmaxLeft = cont_width-left.offsetWidth;
-					var Lmaxtop = cont_height-left.offsetHeight;
-		            //检测水平方向的位置
-		
-					
 					//在修改偏移量的位置减掉相应距离
 		
-		            left.style.left = size4L - Ldx + 'px';
-		            left.style.top = size4LY - Ldy + 'px';
+		            left.style.left = size4L  + 'px';
+		            left.style.top = size4LY  + 'px';
 					pin();
 		        });
 				right.addEventListener('touchmove', function(e){
@@ -428,18 +416,11 @@
 				    var size4RY = this.size3RY - (this.size1RY - this.size2RY);
 						
 				    //获取最大的left 的值
-					var tuo = document.getElementById("tuo");
-				    // var maxLeft = document.documentElement.clientWidth - box.offsetWidth;
-					var cont_width = document.getElementById("content").offsetWidth;
-					var cont_height = document.getElementById("content").offsetHeight;
-					var RmaxLeft = cont_width-right.offsetWidth;
-					var Rmaxtop = cont_height-right.offsetHeight;
-				    //检测水平方向的位置
-				
+					
 					//在修改偏移量的位置减掉相应距离
 						
-				    right.style.left = size4R -Rdx  + 'px';
-				    right.style.top = size4RY -Rdy + 'px';
+				    right.style.left = size4R  -400 + 'px';
+				    right.style.top = size4RY  + 'px';
 					pin();
 				});
 						
@@ -455,11 +436,29 @@
 			var kong=document.getElementById("kong");
 			var kong_l=document.getElementById("left_k");
 			var kong_r=document.getElementById("right_k");
-			if(check(kong_l,left)&&check(kong_r,right)){
+	
+			var f1=false;
+			var f2=false;
+			if(check(kong_l,left)){
+				document.getElementById("left_t").style.visibility="hidden";
+				document.getElementById("left_k").style.visibility="hidden";
+				document.getElementById("left_s").style.display="block";
+				f1=true;
+				// console.log("f1")
+			}
+			if(check(kong_r,right)){
+				document.getElementById("right_t").style.visibility="hidden";
+				document.getElementById("right_k").style.visibility="hidden";
+				document.getElementById("right_s").style.display="block";
+				f2=true;
+				// console.log("f2")
+			}
+			var tuo = document.getElementById("tuo");
+			if(f1&&f2){
 				tuo.style.display="none";
 				kong.style.display="none";
-				succ.style.display="block"
-				console.log("succ")
+				succ.style.display="block";
+				// console.log("succ")
 				var left_s=document.getElementById("left_s");
 				var right_s=document.getElementById("right_s");
 				
