@@ -208,10 +208,67 @@
 		   window.location.href="./two.html"
 		});
 		
-		function jump_to_two(){
-			window.location.href="./two.html"
-		}
+		// function jump_to_two(){
+		// 	window.location.href="./two.html"
+		// }
 		// ---------------------------------------------------------------------------
+		var box = document.querySelector('#left_t');
+		
+		        box.addEventListener('touchstart', function(e){
+		            //获取按下时触点的位置  尺寸 1
+		            this.size1 = e.touches[0].clientX;
+		            //获取按下时 元素距离左侧的偏移量  2
+		            this.size2 = box.offsetLeft;
+		
+		            this.size1Y = e.touches[0].clientY;
+		            this.size2Y = box.offsetTop;
+		        });
+		
+		        box.addEventListener('touchmove', function(e){
+		            this.size3 = e.touches[0].clientX;
+		            //获取移动后的触点的位置
+		            this.size3Y = e.touches[0].clientY;
+		
+		            var size4 = this.size3 - (this.size1 - this.size2);
+		            var size4Y = this.size3Y - (this.size1Y - this.size2Y);
+		
+		            //获取最大的left 的值
+		            // var maxLeft = document.documentElement.clientWidth - box.offsetWidth;
+					var cont_width = document.getElementById("content").offsetWidth;
+					var cont_height = document.getElementById("content").offsetHeight;
+					var maxLeft = cont_width-box.offsetWidth;
+					var maxtop = cont_height-box.offsetHeight;
+		            //检测水平方向的位置
+		            if(size4 <= 0){
+		                size4 = 0;
+						// console.log(0)
+		            }
+		
+		            if(size4 >= maxLeft){
+		                size4 = maxLeft;
+						// console.log(box.offsetWidth)
+		            }
+					//检测垂直方向位置
+					if(size4Y <= 0){
+					    size4Y = 0;
+						// console.log(0)
+					}
+							
+					if(size4Y >= maxtop){
+					    size4Y = maxtop;
+						// console.log(box.offsetWidth)
+					}
+					
+		            //设置css left 的值
+		            box.style.left = size4 + 'px';
+		            box.style.top = size4Y + 'px';
+		        });
+		
+		        document.body.addEventListener('touchstart', function(e){
+		            e.preventDefault();
+		        },{
+		            passive: false
+		        });
 		
 	</script>
 </html>
