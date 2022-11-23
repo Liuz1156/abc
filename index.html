@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>第一集《共生》</title>
+		<title>第一集《遇赦》</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
 		<link rel="stylesheet" href="css/mdui.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,6 @@
 				padding: 0;
 				font-size: 0;
 				display: inline-block;
-				touch-action: none;
 			}
 			html{
 				margin: 0;
@@ -70,7 +69,6 @@
 				border-radius: 5%;
 				background-color: #e1ffef;
 				opacity: 0.9;
-				position: relative;
 			}
 			#name{
 				font-size: 48px;
@@ -91,6 +89,17 @@
 				top: 3%;
 				left: 45%;
 				background: url(img/next.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+			}
+			#pre{
+				/* border: 2px solid red; */
+				width: 15%;
+				height: 10%;
+				position: relative;
+				top: -35%;
+				left: 1%;
+				background: url(img/pre.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 			}
@@ -130,7 +139,7 @@
 				position: relative;
 				top: 13%;
 				left: 0%;
-				background: url(img/one_left.png) no-repeat 100% 100%;
+				background: url(img/two_left.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -141,9 +150,9 @@
 				width: 55%;
 				height: 40%;
 				position: relative;
-				top: 17%;
-				left: -10%;
-				background: url(img/one_right.png) no-repeat 100% 100%;
+				top: -47%;
+				left: 60%;
+				background: url(img/two_right.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -154,9 +163,11 @@
 				width: 45%;
 				height: 40%;
 				position: relative;
-				top: 33%;
-				left: 5%;
-				background: url(img/one_left_1.png) no-repeat 100% 100%;
+				/* top: 33%;
+				left: 7%; */
+				top: 390px;
+				left: 50px;
+				background: url(img/two_left_1.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -167,9 +178,11 @@
 				width: 55%;
 				height: 40%;
 				position: relative;
-				top: 37%;
-				left: -17%;
-				background: url(img/one_right_1.png) no-repeat 100% 100%;
+				/* top: 37%;
+				left: -10%; */
+				top: 440px;
+				left: -90px;
+				background: url(img/two_right_1.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -181,8 +194,8 @@
 				height: 40%;
 				position: relative;
 				top: -67%;
-				left: 5%;
-				background: url(img/one_left.png) no-repeat 100% 100%;
+				left: 7%;
+				background: url(img/two_left.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -194,9 +207,9 @@
 				width: 55%;
 				height: 40%;
 				position: relative;
-				top: -63%;
-				left: 28%;
-				background: url(img/one_right.png) no-repeat 100% 100%;
+				top: -102.5%;
+				left: 35%;
+				background: url(img/two_right.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -208,9 +221,9 @@
 				width:100%;
 				height:100%;
 				border-radius: 5%;
-				background: url("img/poem3.png") no-repeat 45% 25%;
+				background: url("img/poem2.png") no-repeat 45% 25%;
 				background-size: 50% 50%; 
-				z-index: 3;
+				z-index: 4;
 				position: absolute;
 				display: none;
 			}
@@ -238,6 +251,21 @@
 				top:63%;
 				line-height: 60px;
 			}
+			#re{
+				/* border: 2px solid red; */
+				width: 10%;
+				height: 8%;
+				position: relative;
+				top: 1%;
+				left: 1%;
+				background: url(img/refresh.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+			}
+			#refresh{
+				width: 50%;
+				height: 50%;
+			}
 		</style> 
 		<link rel="stylesheet" href="css/datouwang.css">
 	</head>
@@ -258,8 +286,10 @@
 				<div id="bg">
 					
 				<!-- 内容框 -->
-				<div id="content">
+				<div id="content" onclick="che()">
 					<div id="tuo">
+						<!-- 上一张按钮 -->
+						<button class="mdui-btn mdui-ripple" id="pre" onclick="jump_to_one()"></button>
 						<div id="left_t"></div>
 						<div id="right_t"></div>
 					</div>
@@ -296,8 +326,12 @@
 					<svg height="40" width="40" viewBox="0 0 320 320" class="h h-8"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></svg>
 					
 					<div id="poem">
+						<!-- 上一张按钮 -->
+						<button class="mdui-btn mdui-ripple" id="re">
+							<!-- <i class="mdui-icon material-icons" id="refresh">&#xe5d5;</i> -->
+						</button>
 						<div id="text">
-							<h3 id="poem_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;众&nbsp;&nbsp;&nbsp;生</h3></br>
+							<h3 id="poem_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遇&nbsp;&nbsp;&nbsp;赦</h3></br>
 							<p>是亦众生，与我体同</br>
 							应起悲心，怜彼错蒙</br>
 							普劝世人，放生戒杀</br>
@@ -307,10 +341,10 @@
 				</div>
 				
 				<!-- 名字 -->
-				<div id="name">《 &nbsp;  众&nbsp;&nbsp;&nbsp;&nbsp;生  &nbsp; 》</div>
+				<div id="name">《 &nbsp;  遇&nbsp;&nbsp;&nbsp;&nbsp;赦  &nbsp; 》</div>
 				
 				<!-- 下一张按钮 -->
-				<button class="mdui-btn mdui-ripple" id="next" onclick="jump_to_two()"></button>
+				<button class="mdui-btn mdui-ripple" id="next"></button>
 				
 			</div>
 		</div>
@@ -345,23 +379,23 @@
 		    }, false)
 		
 		}
-		var left=document.getElementById("left_t");
-		tap(left, function(){
-			
-		});
-		function stop(){
-			window.clearTimeout(raf);
-		}
+		
 		// ----------------------------------------------------------------------
 		
 		var next=document.getElementById("next");
 		tap(next, function (e) {
-		   window.location.href="./two.html"
+		   window.location.href=""
 		});
 		
-		function jump_to_two(){
-			window.location.href="./two.html"
+		var pre=document.getElementById("pre");
+		tap(pre, function (e) {
+		   window.location.href="./index.html"
+		});
+		
+		function jump_to_one(){
+			window.location.href="./index.html"
 		}
+		
 		// ---------------------------------------------------------------------------
 		var left = document.querySelector('#left_t');
 		var right = document.querySelector('#right_t');
@@ -403,7 +437,7 @@
 		
 					//在修改偏移量的位置减掉相应距离
 		
-		            left.style.left = size4L  + 'px';
+		            left.style.left = size4L-200  + 'px';
 		            left.style.top = size4LY  + 'px';
 					pin();
 		        });
@@ -419,8 +453,8 @@
 					
 					//在修改偏移量的位置减掉相应距离
 						
-				    right.style.left = size4R  -400 + 'px';
-				    right.style.top = size4RY  + 'px';
+				    right.style.left = size4R   + 'px';
+				    right.style.top = size4RY-450  + 'px';
 					pin();
 				});
 						
@@ -432,33 +466,35 @@
 		        });
 		//---------------------------------------------------------------------
 		var raf=null;
+		var f1=false;
+		var f2=false;
 		function pin(){
 			var kong=document.getElementById("kong");
 			var kong_l=document.getElementById("left_k");
 			var kong_r=document.getElementById("right_k");
-	
-			var f1=false;
-			var f2=false;
+			
+			// var f1=false;
+			// var f2=false;
 			if(check(kong_l,left)){
 				document.getElementById("left_t").style.visibility="hidden";
 				document.getElementById("left_k").style.visibility="hidden";
 				document.getElementById("left_s").style.display="block";
 				f1=true;
-				// console.log("f1")
+				console.log("f1 "+f1)
 			}
 			if(check(kong_r,right)){
 				document.getElementById("right_t").style.visibility="hidden";
 				document.getElementById("right_k").style.visibility="hidden";
 				document.getElementById("right_s").style.display="block";
 				f2=true;
-				// console.log("f2")
+				console.log("f2 "+f2)
 			}
 			var tuo = document.getElementById("tuo");
 			if(f1&&f2){
 				tuo.style.display="none";
 				kong.style.display="none";
 				succ.style.display="block";
-				// console.log("succ")
+				console.log("succ")
 				var left_s=document.getElementById("left_s");
 				var right_s=document.getElementById("right_s");
 				
@@ -466,6 +502,29 @@
 				
 				document.getElementById("poem").style.display="block";
 				document.getElementById("succ").style.opacity="0.15";
+				left_s.style.top="33%";
+				right_s.style.top="-2%";
+				document.getElementsByClassName("fly")[0].style.opacity="0.2";
+				document.getElementsByClassName("fly")[1].style.opacity="0.2";
+				return true;
+			}
+		}
+		function che(){
+			var tuo = document.getElementById("tuo");
+			if(f1&&f2){
+				tuo.style.display="none";
+				kong.style.display="none";
+				succ.style.display="block";
+				console.log("succ")
+				var left_s=document.getElementById("left_s");
+				var right_s=document.getElementById("right_s");
+				
+				document.body.classList.toggle('liked')
+				
+				document.getElementById("poem").style.display="block";
+				document.getElementById("succ").style.opacity="0.15";
+				left_s.style.top="33%";
+				right_s.style.top="-2%";
 				document.getElementsByClassName("fly")[0].style.opacity="0.2";
 				document.getElementsByClassName("fly")[1].style.opacity="0.2";
 				return true;
@@ -488,7 +547,8 @@
 		                var obj2height = parseInt($(obj2).height());
 						// console.log(obj2top + obj2height/2)
 						// console.log(obj1top)
-		                if ((obj1top+obj1height-100>= obj2top + obj2height/2 && obj2top + obj2height/2 >= obj1top+100) && (obj2left + obj2width/2 >= obj1left+100 && obj2left + obj2width/2<=obj1left+obj1width-100)) {
+		                if ((obj1top+obj1height-100>= obj2top + obj2height/2 && obj2top + obj2height/2 >= obj1top-400) && (obj2left + obj2width/2 +150>= obj1left+200 && obj2left + obj2width/2<=obj1left+obj1width+300)) {
+							// 670   330   240     180+w     490   
 							return true;
 		                }
 		                else {
@@ -496,7 +556,9 @@
 		                }
 		            }
 		//-------------------------------------------------------------------------------
-		
-		
+		tap(document.getElementById("re"), function() {
+			console.log("a")
+			window.location.reload(true);
+		});
 	</script>
 </html>
