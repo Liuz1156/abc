@@ -102,6 +102,7 @@
 				/* background-color: red; */
 				z-index: 1;
 				position: absolute;
+				display: block;
 			}
 			#kong{
 				/* border: 2px solid red; */
@@ -111,14 +112,25 @@
 				/* background-color: blue; */
 				z-index: 0;
 				position: absolute;
+				display: block;
+			}
+			#succ{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				/* background-color: blue; */
+				z-index: 2;
+				position: absolute;
+				display: none;
 			}
 			#left_t{
 				/* border: 2px solid red; */
 				width: 45%;
 				height: 40%;
 				position: relative;
-				top: 33%;
-				left: 5%;
+				top: 13%;
+				left: 0%;
 				background: url(img/one_left.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
@@ -130,8 +142,8 @@
 				width: 55%;
 				height: 40%;
 				position: relative;
-				top: 37%;
-				left: -17%;
+				top: 17%;
+				left: -10%;
 				background: url(img/one_right.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
@@ -159,6 +171,32 @@
 				top: 37%;
 				left: -17%;
 				background: url(img/one_right_1.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 1; */
+			}
+			#left_s{
+				/* border: 2px solid red; */
+				width: 45%;
+				height: 40%;
+				position: relative;
+				top: 33%;
+				left: 5%;
+				background: url(img/one_left.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 0; */
+			}
+			#right_s{
+				/* border: 2px solid red; */
+				width: 55%;
+				height: 40%;
+				position: relative;
+				top: 37%;
+				left: -17%;
+				background: url(img/one_right.png) no-repeat 100% 100%;
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
@@ -236,11 +274,13 @@
 		    }, false)
 		
 		}
-		// tap(document.getElementsByClassName('tap')[0], function (e) {
-		//     console.log(e)
-		//     console.log(this)
-		//     console.log('触发tap事件');
-		// });
+		var left=document.getElementById("left_t");
+		tap(left, function(){
+			
+		});
+		function stop(){
+			window.clearTimeout(raf);
+		}
 		// ----------------------------------------------------------------------
 		
 		var next=document.getElementById("next");
@@ -254,6 +294,8 @@
 		// ---------------------------------------------------------------------------
 		var left = document.querySelector('#left_t');
 		var right = document.querySelector('#right_t');
+		var tuo = document.getElementById('tuo');
+		var succ = document.getElementById('succ');
 		var Rdx,Rdy,Ldx,Ldy;
 		
 		        left.addEventListener('touchstart', function(e){
@@ -267,6 +309,7 @@
 					
 					Ldx = e.touches[0].clientX - 2*left.offsetLeft;
 					Ldy = e.touches[0].clientY - 2*left.offsetTop;
+					
 		        });
 				right.addEventListener('touchstart', function(e){
 				    //获取按下时触点的位置  尺寸 1
@@ -298,31 +341,13 @@
 					var LmaxLeft = cont_width-left.offsetWidth;
 					var Lmaxtop = cont_height-left.offsetHeight;
 		            //检测水平方向的位置
-		//             if(size4L <= 0){
-		//                 size4L = 0;
-		// 				// console.log(0)
-		//             }
-		
-		//             if(size4L >= LmaxLeft){
-		//                 size4L = LmaxLeft;
-		// 				// console.log(box.offsetWidth)
-		//             }
-		// 			//检测垂直方向位置
-		// 			if(size4LY <= 0){
-		// 			    size4LY = 0;
-		// 				// console.log(0)
-		// 			}
-							
-		// 			if(size4LY >= Lmaxtop){
-		// 			    size4LY = Lmaxtop;
-		// 				// console.log(box.offsetWidth)
-		// 			}
 		
 					
 					//在修改偏移量的位置减掉相应距离
 		
 		            left.style.left = size4L - Ldx + 'px';
 		            left.style.top = size4LY - Ldy + 'px';
+					pin();
 		        });
 				right.addEventListener('touchmove', function(e){
 				    this.size3R = e.touches[0].clientX;
@@ -340,34 +365,12 @@
 					var RmaxLeft = cont_width-right.offsetWidth;
 					var Rmaxtop = cont_height-right.offsetHeight;
 				    //检测水平方向的位置
-				 //    if(size4R <= 0){
-				 //        size4R = 0;
-					// 	// console.log(tuo.style.left)
-				 //    }
-						
-				 //    if(size4R >= window.innerWidth){
-				 //        size4R = window.innerWidth;
-					// 	 // console.log(tuo.offsetWidth)
-				 //    }
-					// //检测垂直方向位置
-					// if(size4RY <= right.offsetHeight-280){
-					//     size4RY = right.offsetHeight-280;
-					// 	// console.log(0)
-					// }
-							
-					// if(size4RY >= Rmaxtop+200){
-					//     size4RY = Rmaxtop+200;
-					// 	// console.log(box.offsetWidth)
-					// }
-					
 				
-					// console.log(Rdx)
-					// console.log(size4R)
-					// console.log(right.style.left)
 					//在修改偏移量的位置减掉相应距离
 						
 				    right.style.left = size4R -Rdx  + 'px';
 				    right.style.top = size4RY -Rdy + 'px';
+					pin();
 				});
 						
 		
@@ -376,6 +379,42 @@
 		        },{
 		            passive: false
 		        });
-		
+		//---------------------------------------------------------------------
+		function pin(){
+			var kong_l=document.getElementById("left_k");
+			var kong_r=document.getElementById("right_k");
+			if(check(kong_l,left)&&check(kong_r,right)){
+				tuo.style.display="none";
+				succ.style.display="block"
+			}else{
+				// console.log("left="+check(kong_l,left))
+				// console.log("right="+check(kong_r,right))
+			}
+		}
+		//判断2个div是否有交集,判断时以obj1作为固定的obj2作为移动的
+		            function check(obj1, obj2) {
+		                //以obj1作为固定的参照物，使用时注意div是否有top与left，如果没有设置的话会是空值
+		                //obj2在obj1的上面 obj2.top+obj2.height<obj1.top 
+		                //obj2在obj1的下面 obj2.top>obj1.top+obj1.height 
+		                //obj2在obj1的左面 obj2.left+obj2.width<obj1.left 
+		                //obj2在obj1的右面 obj2.left>obj1.left+obj1.width
+		                var obj1top = parseInt($(obj1).css("top"));
+		                var obj1left = parseInt($(obj1).css("left"));
+		                var obj1width = parseInt($(obj1).width());
+		                var obj1height = parseInt($(obj1).height());
+		                var obj2top = parseInt($(obj2).css("top"));
+		                var obj2left = parseInt($(obj2).css("left"));
+		                var obj2width = parseInt($(obj2).width());
+		                var obj2height = parseInt($(obj2).height());
+						// console.log(obj2top + obj2height/2)
+						// console.log(obj1top)
+		                if ((obj1top+obj1height-100>= obj2top + obj2height/2 && obj2top + obj2height/2 >= obj1top+100) && (obj2left + obj2width/2 >= obj1left+100 && obj2left + obj2width/2<=obj1left+obj1width-100)) {
+		                    console.log("tt")
+							return true;
+		                }
+		                else {
+		                    return false;
+		                }
+		            }
 	</script>
 </html>
