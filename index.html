@@ -70,6 +70,7 @@
 				border-radius: 5%;
 				background-color: #e1ffef;
 				opacity: 0.9;
+				position: relative;
 			}
 			#name{
 				font-size: 48px;
@@ -94,9 +95,22 @@
 				border-radius: 10%;
 			}
 			#tuo{
+				/* border: 2px solid red; */
 				width:100%;
 				height:100%;
 				border-radius: 5%;
+				/* background-color: red; */
+				z-index: 1;
+				position: absolute;
+			}
+			#kong{
+				/* border: 2px solid red; */
+				width:100%;
+				height:100%;
+				border-radius: 5%;
+				/* background-color: blue; */
+				z-index: 0;
+				position: absolute;
 			}
 			#left_t{
 				/* border: 2px solid red; */
@@ -109,7 +123,7 @@
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
-				z-index: 0;
+				/* z-index: 2; */
 			}
 			#right_t{
 				/* border: 2px solid red; */
@@ -122,7 +136,33 @@
 				background-size: 100% 100%; 
 				border-radius: 10%;
 				cursor: move;
-				z-index: 1;
+				/* z-index: 3; */
+			}
+			#left_k{
+				/* border: 2px solid red; */
+				width: 45%;
+				height: 40%;
+				position: relative;
+				top: 33%;
+				left: 5%;
+				background: url(img/one_left_1.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 0; */
+			}
+			#right_k{
+				/* border: 2px solid red; */
+				width: 55%;
+				height: 40%;
+				position: relative;
+				top: 37%;
+				left: -17%;
+				background: url(img/one_right_1.png) no-repeat 100% 100%;
+				background-size: 100% 100%; 
+				border-radius: 10%;
+				cursor: move;
+				/* z-index: 1; */
 			}
 		</style> 
 	</head>
@@ -212,57 +252,124 @@
 		// 	window.location.href="./two.html"
 		// }
 		// ---------------------------------------------------------------------------
-		var box = document.querySelector('#left_t');
+		var left = document.querySelector('#left_t');
+		var right = document.querySelector('#right_t');
+		var Rdx,Rdy,Ldx,Ldy;
 		
-		        box.addEventListener('touchstart', function(e){
+		        left.addEventListener('touchstart', function(e){
 		            //获取按下时触点的位置  尺寸 1
-		            this.size1 = e.touches[0].clientX;
+		            this.size1L = e.touches[0].clientX;
 		            //获取按下时 元素距离左侧的偏移量  2
-		            this.size2 = box.offsetLeft;
+		            this.size2L = left.offsetLeft;
 		
-		            this.size1Y = e.touches[0].clientY;
-		            this.size2Y = box.offsetTop;
+		            this.size1LY = e.touches[0].clientY;
+		            this.size2LY = left.offsetTop;
+					
+					Ldx = e.touches[0].clientX - 2*left.offsetLeft;
+					Ldy = e.touches[0].clientY - 2*left.offsetTop;
 		        });
+				right.addEventListener('touchstart', function(e){
+				    //获取按下时触点的位置  尺寸 1
+				    this.size1R = e.touches[0].clientX;
+				    //获取按下时 元素距离左侧的偏移量  2
+				    this.size2R = right.offsetLeft;
+						
+				    this.size1RY = e.touches[0].clientY;
+				    this.size2RY = right.offsetTop;
+					
+					//在按下时求出蓝色线段距离
+					Rdx = e.touches[0].clientX - right.offsetLeft;
+					Rdy = e.touches[0].clientY - 2*right.offsetTop;
+				});
+				
 		
-		        box.addEventListener('touchmove', function(e){
-		            this.size3 = e.touches[0].clientX;
+		        left.addEventListener('touchmove', function(e){
+		            this.size3L = e.touches[0].clientX;
 		            //获取移动后的触点的位置
-		            this.size3Y = e.touches[0].clientY;
+		            this.size3LY = e.touches[0].clientY;
 		
-		            var size4 = this.size3 - (this.size1 - this.size2);
-		            var size4Y = this.size3Y - (this.size1Y - this.size2Y);
+		            var size4L = this.size3L - (this.size1L - this.size2L);
+		            var size4LY = this.size3LY - (this.size1LY - this.size2LY);
 		
 		            //获取最大的left 的值
 		            // var maxLeft = document.documentElement.clientWidth - box.offsetWidth;
 					var cont_width = document.getElementById("content").offsetWidth;
 					var cont_height = document.getElementById("content").offsetHeight;
-					var maxLeft = cont_width-box.offsetWidth;
-					var maxtop = cont_height-box.offsetHeight;
+					var LmaxLeft = cont_width-left.offsetWidth;
+					var Lmaxtop = cont_height-left.offsetHeight;
 		            //检测水平方向的位置
-		            if(size4 <= 0){
-		                size4 = 0;
-						// console.log(0)
-		            }
+		//             if(size4L <= 0){
+		//                 size4L = 0;
+		// 				// console.log(0)
+		//             }
 		
-		            if(size4 >= maxLeft){
-		                size4 = maxLeft;
-						// console.log(box.offsetWidth)
-		            }
-					//检测垂直方向位置
-					if(size4Y <= 0){
-					    size4Y = 0;
-						// console.log(0)
-					}
+		//             if(size4L >= LmaxLeft){
+		//                 size4L = LmaxLeft;
+		// 				// console.log(box.offsetWidth)
+		//             }
+		// 			//检测垂直方向位置
+		// 			if(size4LY <= 0){
+		// 			    size4LY = 0;
+		// 				// console.log(0)
+		// 			}
 							
-					if(size4Y >= maxtop){
-					    size4Y = maxtop;
-						// console.log(box.offsetWidth)
-					}
+		// 			if(size4LY >= Lmaxtop){
+		// 			    size4LY = Lmaxtop;
+		// 				// console.log(box.offsetWidth)
+		// 			}
+		
 					
-		            //设置css left 的值
-		            box.style.left = size4 + 'px';
-		            box.style.top = size4Y + 'px';
+					//在修改偏移量的位置减掉相应距离
+		
+		            left.style.left = size4L - Ldx + 'px';
+		            left.style.top = size4LY - Ldy + 'px';
 		        });
+				right.addEventListener('touchmove', function(e){
+				    this.size3R = e.touches[0].clientX;
+				    //获取移动后的触点的位置
+				    this.size3RY = e.touches[0].clientY;
+						
+				    var size4R = this.size3R - (this.size1R - this.size2R);
+				    var size4RY = this.size3RY - (this.size1RY - this.size2RY);
+						
+				    //获取最大的left 的值
+					var tuo = document.getElementById("tuo");
+				    // var maxLeft = document.documentElement.clientWidth - box.offsetWidth;
+					var cont_width = document.getElementById("content").offsetWidth;
+					var cont_height = document.getElementById("content").offsetHeight;
+					var RmaxLeft = cont_width-right.offsetWidth;
+					var Rmaxtop = cont_height-right.offsetHeight;
+				    //检测水平方向的位置
+				 //    if(size4R <= 0){
+				 //        size4R = 0;
+					// 	// console.log(tuo.style.left)
+				 //    }
+						
+				 //    if(size4R >= window.innerWidth){
+				 //        size4R = window.innerWidth;
+					// 	 // console.log(tuo.offsetWidth)
+				 //    }
+					// //检测垂直方向位置
+					// if(size4RY <= right.offsetHeight-280){
+					//     size4RY = right.offsetHeight-280;
+					// 	// console.log(0)
+					// }
+							
+					// if(size4RY >= Rmaxtop+200){
+					//     size4RY = Rmaxtop+200;
+					// 	// console.log(box.offsetWidth)
+					// }
+					
+				
+					// console.log(Rdx)
+					// console.log(size4R)
+					// console.log(right.style.left)
+					//在修改偏移量的位置减掉相应距离
+						
+				    right.style.left = size4R -Rdx  + 'px';
+				    right.style.top = size4RY -Rdy + 'px';
+				});
+						
 		
 		        document.body.addEventListener('touchstart', function(e){
 		            e.preventDefault();
