@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生息</title>
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.95);
+			}
+			#content{
+				/*border: 2px solid red;*/
+				width: 100%;
+				height: 1570px;
+			}
+			#sheng{
+				margin: 250px auto;
+				width: 242px;
+				height: 700px;
+				font-size: 240px;
+				line-height: 350px;
+				text-align: center;
+				animation: breath linear 1.5s infinite alternate;
+				color: #039356;
+			}
+
+			@keyframes breath {
+			0%   { opacity: 0.8; }
+			100% { opacity: 0; }
+			}
+			svg{
+				position: relative;
+				left: 50px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="content">
+			<div id="sheng">
+				<p>生
+					<svg width="220px" height="120px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+						<defs>
+							<linearGradient id="leaf" x1="0%" y1="100%" x2="100%" y2="0%">
+								<stop offset="0%" style="stop-color:rgb(24,215,68);stop-opacity:0.5"/>
+								<stop offset="100%" style="stop-color:rgb(115,220,0);stop-opacity:1"/>
+							</linearGradient>
+						</defs>
+
+						<path d="M1 100 C1 4 88 5 114 1 C114 39 110 124 1 100"
+							  style="fill:url(#leaf);stroke:#11aa42;stroke-width:1px;"/>
+
+						<path d="M1 100 C17 68 90 45 114 1"
+							  style="fill:transparent;stroke:#11aa42;stroke-width:1px;" />
+
+					</svg>
+					息</p>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// console.log("ssdc")
+			// alert("success");
+			$("body").click(function (){
+				// alert("success");
+				window.location.href='./index.html';
+			});
+		});
+	</script>
+</html>
